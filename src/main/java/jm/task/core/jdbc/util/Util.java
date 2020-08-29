@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -43,28 +44,19 @@ public class Util {
         }
     }
 
-    private static SessionFactory sessionFactory = null;
-
-    /**
-     * Open session.
-     *
-     * @return the session
-     */
     public static Session openSession() {
-        if (sessionFactory == null) {
-            final Configuration configuration = new Configuration();
-
-            sessionFactory = configuration.buildSessionFactory( new StandardServiceRegistryBuilder().build() );
-        }
-        return sessionFactory.openSession();
-       /* try {
+        try {
             Configuration configuration = new Configuration();
-            configuration.configure();
-            sessionFactory = configuration.buildSessionFactory();
-
-            return sessionFactory.openSession();
+            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://127.0.0.1:3306/usersdb?serverTimezone=Europe/Moscow&amp");
+            configuration.setProperty("hibernate.connection.username", "root");
+            configuration.setProperty("hibernate.connection.password", "01v891ea");
+            configuration.setProperty("hibernate.show_sql", "true");
+            configuration.addAnnotatedClass(User.class);
+//            configuration.getClassMapping("jm.task.core.jdbc.model.User");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return configuration.buildSessionFactory().openSession();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
-        }*/
+        }
     }
 }

@@ -35,30 +35,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        // JDBC{
 //        // реализуйте алгоритм здесь
-//        UserService userService = new UserServiceImpl();
-//        //Создание таблицы
-//        userService.createUsersTable();
-//        //Создание леммингов
-//        userService.saveUser("Jhon", "Starsk", (byte) 35);
-//        System.out.println("Jhon добавлен в базу");
-//        userService.saveUser("Steve", "Mius", (byte) 15);
-//        System.out.println("Steve добавлен в базу");
-//        userService.saveUser("Shinie", "Corsa", (byte) 29);
-//        System.out.println("Shinie добавлен в базу");
-//        userService.saveUser("Rick", "Pickles", (byte) 41);
-//        System.out.println("Rick добавлен в базу");
-//
-//        //Вывод на консоль
-//        userService.getAllUsers().stream().forEach(User::toString);
-//        //Очистка таблицы
-//        userService.cleanUsersTable();
-//        //Удаление таблицы
-//        userService.dropUsersTable();
-        // JDBC}
+        UserService userService = new UserServiceImpl();
+        //Создание таблицы
+        userService.createUsersTable();
+        //Создание леммингов
+        userService.saveUser("Jhon", "Starsk", (byte) 35);
+        System.out.println("Jhon добавлен в базу");
+        userService.saveUser("Steve", "Mius", (byte) 15);
+        System.out.println("Steve добавлен в базу");
+        userService.saveUser("Shinie", "Corsa", (byte) 29);
+        System.out.println("Shinie добавлен в базу");
+        userService.saveUser("Rick", "Pickles", (byte) 41);
+        System.out.println("Rick добавлен в базу");
 
-        // HIBERNATE{
         final Session session = getSession();
         try {
             System.out.println("querying all the managed entities...");
@@ -78,6 +68,5 @@ public class Main {
         UserDaoHibernateImpl dao = new UserDaoHibernateImpl();
         List<User> userList = dao.getAllUsers();
         System.out.println("Users size " + userList.size());
-        // HIBERNATE}
     }
 }
